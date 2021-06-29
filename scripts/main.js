@@ -64,10 +64,11 @@ const drawSpaceship = () => {
 */
 
 const drawNumbers = () => {
+    let best = localStorage.getItem("TopostaroShootingBest");
     ctx.font = "22px Arial";
     ctx.fillStyle = "#0095DD";
 //    ctx.fillText("score: " + score + ", #beams: " + beams.length + ", #meteos: " + meteos.length + ", #blast: " + blasts.length, 8, 20);
-    ctx.fillText("Score: " + score, 8, 20);
+    ctx.fillText("Score: " + score + " Your Best: " + best, 8, 20);
 }
 
 const fire = () => {
@@ -209,6 +210,15 @@ const spaceshipCollide = () => {
         let meteo = meteos[i];
         if ((meteo.x - spaceship.x)**2 + (meteo.y - canvas.height + spaceship.marginToBottom + 18)**2 < 2500) {
             alert("GAMEOVER!\nYour score: " + score);
+
+            let best = localStorage.getItem("TopostaroShootingBest");
+            if (!best) {
+                localStorage.setItem("TopostaroShootingBest", score);
+            } else {
+                if (best < score) {
+                    localStorage.setItem("TopostaroShootingBest", score);
+                }
+            }
             document.location.reload();
         }
     }
@@ -217,6 +227,15 @@ const spaceshipCollide = () => {
         let meteo = superMeteos[i];
         if ((meteo.x - spaceship.x)**2 + (meteo.y - canvas.height + spaceship.marginToBottom + 18)**2 < 400) {
             alert("GAMEOVER!\nYour score: " + score);
+            
+            let best = localStorage.getItem("TopostaroShootingBest");
+            if (!best) {
+                localStorage.setItem("TopostaroShootingBest", score);
+            } else {
+                if (best < score) {
+                    localStorage.setItem("TopostaroShootingBest", score);
+                }
+            }
             document.location.reload();
         }
     }
