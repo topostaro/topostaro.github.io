@@ -209,6 +209,7 @@ const spaceshipCollide = () => {
     for (let i = 0; i < meteos.length; i++) {
         let meteo = meteos[i];
         if ((meteo.x - spaceship.x)**2 + (meteo.y - canvas.height + spaceship.marginToBottom + 18)**2 < 2500) {
+            meteos[i].alive = false;
             alert("GAMEOVER!\nYour score: " + score);
 
             let best = localStorage.getItem("TopostaroShootingBest");
@@ -220,12 +221,14 @@ const spaceshipCollide = () => {
                 }
             }
             document.location.reload();
+            return;
         }
     }
 
     for (let i = 0; i < superMeteos.length; i++) {
         let meteo = superMeteos[i];
         if ((meteo.x - spaceship.x)**2 + (meteo.y - canvas.height + spaceship.marginToBottom + 18)**2 < 400) {
+            superMeteos[i].alive = false;
             alert("GAMEOVER!\nYour score: " + score);
             
             let best = localStorage.getItem("TopostaroShootingBest");
@@ -237,6 +240,7 @@ const spaceshipCollide = () => {
                 }
             }
             document.location.reload();
+            return;
         }
     }
 
